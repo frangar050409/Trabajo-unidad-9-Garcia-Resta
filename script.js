@@ -153,7 +153,4 @@ document.querySelectorAll(".modo").forEach((boton) => {
   });
 });
 
-document.getElementById("btnPPT").addEventListener("click", piedraPapelTijera);
-document.getElementById("btnTorneo").addEventListener("click", torneoAlgoritmico);
-
 actualizarMarcador();

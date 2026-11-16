@@ -64,23 +64,6 @@
 
     <ol class="historial" id="historial"></ol>
 
-    <section class="auditoria">
-      <h2>🔍 Auditoría del Torneo Algorítmico</h2>
-      <div class="auditoria__grilla">
-        <article>
-          <h3>¿Por qué el || no frenaba el torneo?</h3>
-          <p>Con <code>victoriasUsuario &lt; 3 || victoriasMaquina &lt; 3</code> alcanza con que <strong>uno</strong> de los dos tenga menos de 3 para que la condición sea <code>true</code>. Cuando el usuario llega a 3, la máquina todavía tiene menos de 3, así que el bucle sigue: solo se detendría si los dos llegaran a 3 a la vez, algo que nunca pasa.</p>
-        </article>
-        <article>
-          <h3>¿Qué línea hace que el bucle devuelva false?</h3>
-          <p><code>while (victoriasUsuario &lt; 3 &amp;&amp; victoriasMaquina &lt; 3)</code>, junto con los acumuladores <code>victoriasUsuario++</code> y <code>victoriasMaquina++</code>. Cada ronda ganada suma 1; cuando cualquiera llega a 3, una de las dos partes es <code>false</code> y con <code>&amp;&amp;</code> el bucle se corta.</p>
-        </article>
-      </div>
-      <div class="consola">
-        <button type="button" id="btnPPT">Consigna 1 · con prompt</button>
-        <button type="button" id="btnTorneo">Torneo reparado · con prompt y consola</button>
-      </div>
-    </section>
   </main>
 
   <script src="consigna.js"></script>
