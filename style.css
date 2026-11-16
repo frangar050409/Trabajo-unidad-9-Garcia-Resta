@@ -1,0 +1,482 @@
+:root {
+  --fondo: #0d0221;
+  --panel: #190535;
+  --magenta: #ff2a6d;
+  --cian: #05d9e8;
+  --lima: #d1f7ff;
+  --oro: #ffd319;
+  --verde: #39ff88;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at top, rgba(255, 42, 109, 0.25), transparent 60%),
+    radial-gradient(ellipse at bottom, rgba(5, 217, 232, 0.2), transparent 60%),
+    var(--fondo);
+  color: var(--lima);
+  font-family: "Chakra Petch", system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+.escanlineas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 3px);
+  z-index: 10;
+}
+
+header {
+  text-align: center;
+  padding: 40px 16px 8px;
+}
+
+.unidad {
+  margin: 0;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--cian);
+}
+
+h1 {
+  font-family: "Bungee", cursive;
+  font-weight: 400;
+  font-size: clamp(1.8rem, 6vw, 3.6rem);
+  margin: 10px 0 20px;
+  background: linear-gradient(180deg, #fff 20%, var(--magenta) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 0 #6b0f3b) drop-shadow(0 0 18px rgba(255, 42, 109, 0.6));
+  animation: entrada 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+h1 span {
+  color: var(--cian);
+  -webkit-text-fill-color: var(--cian);
+}
+
+@keyframes entrada {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+}
+
+.modos {
+  display: inline-flex;
+  gap: 6px;
+  padding: 6px;
+  background: var(--panel);
+  border: 2px solid rgba(5, 217, 232, 0.4);
+  border-radius: 14px;
+}
+
+.modo {
+  font: inherit;
+  font-weight: 600;
+  color: var(--lima);
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.modo.activo {
+  background: var(--cian);
+  color: var(--fondo);
+  box-shadow: 0 0 18px rgba(5, 217, 232, 0.6);
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px 16px 64px;
+}
+
+.arena {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.luchador {
+  text-align: center;
+  background: linear-gradient(180deg, rgba(5, 217, 232, 0.12), transparent);
+  border: 2px solid rgba(5, 217, 232, 0.5);
+  border-radius: 20px;
+  padding: 18px;
+  transition: transform 0.2s ease;
+}
+
+.luchador--cpu {
+  background: linear-gradient(180deg, rgba(255, 42, 109, 0.15), transparent);
+  border-color: rgba(255, 42, 109, 0.6);
+}
+
+.luchador.golpe {
+  animation: golpe 0.45s ease;
+}
+
+@keyframes golpe {
+  20%, 60% {
+    transform: translateX(-10px);
+    filter: brightness(1.8);
+  }
+  40%, 80% {
+    transform: translateX(10px);
+  }
+}
+
+.nombre {
+  font-family: "Bungee", cursive;
+  margin: 0 0 8px;
+  letter-spacing: 0.1em;
+}
+
+.vida {
+  height: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+body.modo-torneo .vida {
+  visibility: visible;
+}
+
+.vida__barra {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--verde), var(--oro));
+  transition: width 0.5s ease;
+}
+
+.luchador--cpu .vida__barra {
+  margin-left: auto;
+}
+
+.mano {
+  font-size: clamp(4rem, 14vw, 7rem);
+  margin: 12px 0;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.25));
+}
+
+.luchador--cpu .mano {
+  transform: scaleX(-1);
+}
+
+body.sacudiendo .mano {
+  animation: sacudir 0.3s ease-in-out 3;
+}
+
+@keyframes sacudir {
+  50% {
+    translate: 0 -24px;
+  }
+}
+
+.puntos {
+  font-family: "Bungee", cursive;
+  font-size: 2.4rem;
+  margin: 0;
+  color: var(--oro);
+  text-shadow: 0 0 14px rgba(255, 211, 25, 0.6);
+}
+
+.vs {
+  font-family: "Bungee", cursive;
+  font-size: clamp(1.6rem, 5vw, 3rem);
+  color: var(--oro);
+  text-shadow: 0 0 20px var(--magenta);
+  animation: latido 1.2s ease-in-out infinite;
+}
+
+@keyframes latido {
+  50% {
+    transform: scale(1.15) rotate(-6deg);
+  }
+}
+
+.anuncio {
+  text-align: center;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 700;
+  min-height: 2.2em;
+  margin: 24px 0 16px;
+}
+
+.anuncio.pop {
+  animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+}
+
+.anuncio.gano {
+  color: var(--verde);
+  text-shadow: 0 0 14px rgba(57, 255, 136, 0.6);
+}
+
+.anuncio.perdio,
+.anuncio.error {
+  color: var(--magenta);
+}
+
+.anuncio.empate {
+  color: var(--oro);
+}
+
+.anuncio.campeon {
+  font-family: "Bungee", cursive;
+  font-weight: 400;
+}
+
+.opciones {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.opcion {
+  position: relative;
+  font: inherit;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--lima);
+  background: var(--panel);
+  border: 2px solid rgba(209, 247, 255, 0.25);
+  border-radius: 18px;
+  padding: 18px 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.opcion span {
+  font-size: 2.4rem;
+}
+
+.opcion kbd {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-family: inherit;
+  font-size: 0.7rem;
+  opacity: 0.6;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 0 5px;
+}
+
+.opcion:hover {
+  transform: translateY(-6px);
+  border-color: var(--cian);
+  box-shadow: 0 10px 30px rgba(5, 217, 232, 0.35);
+}
+
+.opcion:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.escribir {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.escribir label {
+  display: block;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.escribir div {
+  display: flex;
+  gap: 8px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.escribir input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 2px solid rgba(5, 217, 232, 0.4);
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--lima);
+}
+
+.escribir input:focus {
+  outline: none;
+  border-color: var(--cian);
+  box-shadow: 0 0 14px rgba(5, 217, 232, 0.5);
+}
+
+.escribir button,
+.otra button,
+.consola button {
+  font: inherit;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: none;
+  background: var(--magenta);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.escribir button:hover,
+.otra button:hover,
+.consola button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 42, 109, 0.6);
+}
+
+.otra {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  animation: pop 0.4s ease;
+}
+
+.otra[hidden] {
+  display: none;
+}
+
+.otra p {
+  margin: 0;
+}
+
+#otraNo {
+  background: transparent;
+  border: 2px solid var(--magenta);
+}
+
+.historial {
+  list-style: none;
+  padding: 0;
+  margin: 24px auto 0;
+  max-width: 520px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.historial li {
+  padding: 8px 14px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid var(--oro);
+  animation: deslizar 0.35s ease;
+}
+
+.historial li.gano {
+  border-color: var(--verde);
+}
+
+.historial li.perdio {
+  border-color: var(--magenta);
+}
+
+@keyframes deslizar {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
+.auditoria {
+  margin-top: 48px;
+  padding: 28px;
+  border-radius: 22px;
+  background: var(--panel);
+  border: 2px solid rgba(255, 211, 25, 0.35);
+}
+
+.auditoria h2 {
+  font-family: "Bungee", cursive;
+  font-weight: 400;
+  font-size: 1.3rem;
+  margin: 0 0 18px;
+  color: var(--oro);
+}
+
+.auditoria__grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.auditoria article {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.auditoria h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: var(--cian);
+}
+
+.auditoria p {
+  margin: 0;
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
+code {
+  color: var(--oro);
+  font-size: 0.9em;
+}
+
+.consola {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+@media (max-width: 560px) {
+  .arena {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .vs {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

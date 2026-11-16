@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piedra, Papel o Tijera · Torneo Algorítmico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Chakra+Petch:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="escanlineas" aria-hidden="true"></div>
+
+  <header>
+    <p class="unidad">Unidad 9 · While loop</p>
+    <h1>Piedra <span>·</span> Papel <span>·</span> Tijera</h1>
+    <div class="modos" role="tablist">
+      <button type="button" class="modo activo" data-modo="libre" role="tab">Partida libre</button>
+      <button type="button" class="modo" data-modo="torneo" role="tab">🏆 Torneo · primero a 3</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="arena">
+      <div class="luchador" id="ladoJugador">
+        <p class="nombre">VOS</p>
+        <div class="vida"><div class="vida__barra" id="vidaJugador"></div></div>
+        <div class="mano" id="manoJugador">✊</div>
+        <p class="puntos" id="puntosJugador">0</p>
+      </div>
+
+      <div class="vs" id="vs">VS</div>
+
+      <div class="luchador luchador--cpu" id="ladoMaquina">
+        <p class="nombre">CPU</p>
+        <div class="vida"><div class="vida__barra" id="vidaMaquina"></div></div>
+        <div class="mano" id="manoMaquina">✊</div>
+        <p class="puntos" id="puntosMaquina">0</p>
+      </div>
+    </section>
+
+    <p class="anuncio" id="anuncio">Elegí tu jugada</p>
+
+    <div class="opciones">
+      <button type="button" class="opcion" data-jugada="piedra"><span>🪨</span>Piedra<kbd>1</kbd></button>
+      <button type="button" class="opcion" data-jugada="papel"><span>📄</span>Papel<kbd>2</kbd></button>
+      <button type="button" class="opcion" data-jugada="tijera"><span>✂️</span>Tijera<kbd>3</kbd></button>
+    </div>
+
+    <form class="escribir" id="formEscribir">
+      <label for="jugadaTexto">O escribila, en mayúscula o minúscula:</label>
+      <div>
+        <input type="text" id="jugadaTexto" placeholder="PiEdRa, papel, TIJERA...">
+        <button type="submit">Jugar</button>
+      </div>
+    </form>
+
+    <div class="otra" id="otra" hidden>
+      <p id="otraTexto">¿Te gustaría volver a jugar?</p>
+      <button type="button" id="otraSi">Sí</button>
+      <button type="button" id="otraNo">No</button>
+    </div>
+
+    <ol class="historial" id="historial"></ol>
+
+    <section class="auditoria">
+      <h2>🔍 Auditoría del Torneo Algorítmico</h2>
+      <div class="auditoria__grilla">
+        <article>
+          <h3>¿Por qué el || no frenaba el torneo?</h3>
+          <p>Con <code>victoriasUsuario &lt; 3 || victoriasMaquina &lt; 3</code> alcanza con que <strong>uno</strong> de los dos tenga menos de 3 para que la condición sea <code>true</code>. Cuando el usuario llega a 3, la máquina todavía tiene menos de 3, así que el bucle sigue: solo se detendría si los dos llegaran a 3 a la vez, algo que nunca pasa.</p>
+        </article>
+        <article>
+          <h3>¿Qué línea hace que el bucle devuelva false?</h3>
+          <p><code>while (victoriasUsuario &lt; 3 &amp;&amp; victoriasMaquina &lt; 3)</code>, junto con los acumuladores <code>victoriasUsuario++</code> y <code>victoriasMaquina++</code>. Cada ronda ganada suma 1; cuando cualquiera llega a 3, una de las dos partes es <code>false</code> y con <code>&amp;&amp;</code> el bucle se corta.</p>
+        </article>
+      </div>
+      <div class="consola">
+        <button type="button" id="btnPPT">Consigna 1 · con prompt</button>
+        <button type="button" id="btnTorneo">Torneo reparado · con prompt y consola</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="consigna.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
